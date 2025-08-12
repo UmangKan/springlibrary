@@ -1,5 +1,6 @@
 package com.books.library.dao.impl;
 
+import com.books.library.TestDataUtil;
 import com.books.library.doa.impl.BookDoaimpl;
 import com.books.library.domain.Book;
 import org.junit.jupiter.api.Test;
@@ -25,11 +26,7 @@ public class BookDoaImplTest {
     @Test
     public void testThatCreateBookGeneratesCorrectSql()
     {
-        Book book = Book.builder()
-                .isbn("978")
-                .title("The boy Who lived")
-                .authorId(1L)
-                .build();
+        Book book = TestDataUtil.createTestBook();
         underTest.create(book);
         verify(jdbcTemplate).update(
                 eq("INSERT INTO books (isbn, title, author_Id) VALUES (?, ?, ?)"),
