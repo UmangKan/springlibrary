@@ -29,22 +29,30 @@ public class BookDoaimpl implements BookDoa {
     }
 
     @Override
-    public Optional<Book> find(String isbn) {
-        List<Book> results = jdbcTemplate.query("SELECT isbn, title, authorId from books where isbn = ? LIMIT = 1",
-                new BookRowMapper(), isbn);
+    public Optional<Book> findOne(String isbn) {
+        List<Book> results = jdbcTemplate.query(
+                "SELECT isbn, title, author_Id FROM books WHERE isbn = ? LIMIT 1",
+                     new BookRowMapper(), isbn);
         return results.stream().findFirst();
 
     }
 
+    @Override
+    public List<Book> find() {
+        return jdbcTemplate.query(
+                "SELECT isbn, title, author_Id FROM books",
+                new BookRowMapper()
+        );
+    }
+
     public static class BookRowMapper implements RowMapper<Book>
     {
-
         @Override
         public Book mapRow(ResultSet rs, int rowNum) throws SQLException {
             return Book.builder()
                     .isbn(rs.getString("isbn"))
                     .title(rs.getString("title"))
-                    .authorId(rs.getLong("authorId"))
+                    .authorId(rs.getLong("author_Id"))
                     .build();
         }
     }

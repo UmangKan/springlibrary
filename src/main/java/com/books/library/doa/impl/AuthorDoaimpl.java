@@ -49,4 +49,11 @@ public class AuthorDoaimpl implements AuthorDoa {
         }
     }
 
+    @Override
+    public List<Author> find() {
+        return jdbcTemplate.query(
+                "SELECT id, name, age from authors",
+                new AuthorRowMapper()
+        );
+    }
 }
