@@ -11,4 +11,6 @@ public interface BookDoa {
     Optional<Book> findOne(String isbn);
 
     List<Book> find();
+
+    void update(String isbn, Book book);
 }

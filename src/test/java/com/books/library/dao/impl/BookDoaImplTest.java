@@ -56,6 +56,18 @@ public class BookDoaImplTest {
         );
     }
 
+    @Test
+    public void testThatUpdatesGeneratesTheCorrectSQL()
+    {
+        Book book = TestDataUtil.createTestBookA();
+        underTest.update("978", book);
+
+        verify(jdbcTemplate).update(
+                "UPDATE books SET isbn=?, title=?, author_id=? WHERE isbn=?",
+                "978", "The boy Who lived", 1L, "978"
+        );
+    }
+
 
 
 
