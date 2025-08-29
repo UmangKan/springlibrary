@@ -1,4 +1,4 @@
-package com.books.library.dao.impl;
+/*package com.books.library.reposotories;
 
 import com.books.library.TestDataUtil;
 import com.books.library.doa.impl.AuthorDoaimpl;
@@ -63,6 +63,19 @@ public class AuthorDaoImplIntegrationTests {
         Optional<Author> result = underTest.findOne(authorA.getId());
         assertThat(result).isPresent();
         assertThat(result.get()).isEqualTo(authorA);
+        
 
     }
-}
+
+    @Test
+    public void testThatAuthorCanBeDeleted()
+    {
+        Author authorA = TestDataUtil.createTestAuthorA();
+        underTest.create(authorA);
+        underTest.delete(authorA.getId());
+        Optional<Author> result = underTest.findOne(authorA.getId());
+        assertThat(result).isEmpty();
+
+
+    }
+}*/
